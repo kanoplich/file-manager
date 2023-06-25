@@ -1,9 +1,9 @@
 import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
-import { getUserName } from './cli/args.js';
+import { getUserName } from './cli/getUserName.js';
 import { homedir } from 'os';
 import { instructionFunc } from './instruction/instruction.js';
-import { printURL } from './utils.js';
+import { printURL } from './utils/utils.js';
 
 const username = getUserName();
 process.chdir(homedir());

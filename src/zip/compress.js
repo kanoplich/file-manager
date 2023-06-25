@@ -9,8 +9,7 @@ export const compress = async (pathFrom, pathTo) => {
     const destination = createWriteStream(`${pathTo}.br`);
 
     await pipeline(source, brZip, destination);
-  } catch(err) {
-    console.log(err);
+  } catch {
     console.log('Operation failed');
   }
 }

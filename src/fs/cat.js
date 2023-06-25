@@ -1,7 +1,7 @@
 import { access, constants } from 'fs/promises';
 import { resolve } from 'path';
 import { createReadStream } from 'fs';
-import { printURL } from '../utils.js';
+import { printURL } from '../utils/utils.js';
 
 export const cat = async (url, path) => {
 
@@ -22,7 +22,7 @@ export const cat = async (url, path) => {
       });
     
       readFile.on('end', () => {
-        console.log('\n');
+        console.log('');
         printURL();
       });
     });

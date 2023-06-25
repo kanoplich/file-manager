@@ -1,10 +1,8 @@
 import { writeFile } from 'fs/promises';
-import { resolve } from 'path';
 
-export const add = async (url, path) => {
+export const add = async (path) => {
   try {
-    const pathFile = resolve(url, path);
-    await writeFile(pathFile, '');
+    await writeFile(path, '', { flag: 'wx' });
   } catch {
     console.log('Operation failed');
   }
