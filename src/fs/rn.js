@@ -1,15 +1,10 @@
 import { rename, access, constants } from 'fs/promises';
 
 export const rn = async (oldPath, newName) => {
-  try {
-    await access(oldPath, constants.F_OK);
+  await access(oldPath, constants.F_OK);
+  const array = oldPath.split('/');
+  array.splice(-1, 1, newName);
+  const newPath = array.join('/');
 
-    const array = oldPath.split('/');
-    array.splice(-1, 1, newName);
-    const newPath = array.join('/');
-
-    await rename(oldPath, newPath);
-  } catch {
-    console.log('Operation failed');
-  }
+  await rename(oldPath, newPath);
 }

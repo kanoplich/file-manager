@@ -13,47 +13,48 @@ import { compress } from "../zip/compress.js";
 import { decompress } from "../zip/decompress.js";
 
 export const instructionFunc = async (line, url) => {
-  const [command, path, newName] = line.split(' ');
+  const array = line.match(/(?:[^\s"]+|"[^"]*")+/g);
+  const [command, pathFrom, pathTo] = array.map(item => item.replace(/"/g, ''));
 
   switch (command) {
     case 'up':
       up();
       break;
     case 'cd':
-      await cd(url, path);
+      await cd(url, pathFrom);
       break;
     case 'ls':
       await ls();
       break;
     case 'cat':
-      await cat(url, path);
+      await cat(url, pathFrom);
       break;
     case 'add':
-      await add(url, path);
+      await add(pathFrom);
       break;
     case 'rn':
-      await rn(path, newName);
+      await rn(pathFrom, pathTo);
       break;
     case 'cp':
-      await cp(path, newName);
+      await cp(pathFrom, pathTo);
       break;
     case 'mv':
-      await mv(path, newName);
+      await mv(pathFrom, pathTo);
       break;
     case 'rm':
-      await rm(path);
+      await rm(pathFrom);
       break;
     case 'os':
-      systemInfo(path);
+      systemInfo(pathFrom);
       break;
     case 'hash':
-      await calculateHash(path);
+      await calculateHash(pathFrom);
       break;
     case 'compress':
-      await compress(path, newName);
+      await compress(pathFrom, pathTo);
       break;
     case 'decompress':
-      await decompress(path, newName)
+      await decompress(pathFrom, pathTo)
       break;
     default:
       console.log('Invalid input');
