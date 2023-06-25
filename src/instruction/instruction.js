@@ -8,6 +8,7 @@ import { cp } from "../fs/cp.js";
 import { mv } from "../fs/mv.js";
 import { rm } from "../fs/rm.js";
 import { systemInfo } from "../os/systemInfo.js";
+import { calculateHash } from "../hash/calculateHash.js";
 
 export const instructionFunc = async (line, url) => {
   const [command, path, newName] = line.split(' ');
@@ -42,6 +43,9 @@ export const instructionFunc = async (line, url) => {
       break;
     case 'os':
       systemInfo(path);
+      break;
+    case 'hash':
+      await calculateHash(path);
       break;
     default:
       console.log('Invalid input');
