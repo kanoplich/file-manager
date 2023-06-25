@@ -3,9 +3,13 @@ import { cd } from "../nwd/cd.js";
 import { ls } from "../nwd/ls.js";
 import { cat } from "../fs/cat.js";
 import { add } from "../fs/add.js";
+import { rn } from "../fs/rn.js";
+import { cp } from "../fs/cp.js";
+import { mv } from "../fs/mv.js";
+import { rm } from "../fs/rm.js";
 
 export const instructionFunc = async (line, url) => {
-  const [command, path] = line.split(' ');
+  const [command, path, newName] = line.split(' ');
 
   switch (command) {
     case 'up':
@@ -17,8 +21,20 @@ export const instructionFunc = async (line, url) => {
     case 'ls':
       await ls();
       break;
-    case 'add': 
+    case 'add':
       await add(url, path);
+      break;
+    case 'rn':
+      await rn(path, newName);
+      break;
+    case 'cp':
+      await cp(path, newName);
+      break;
+    case 'mv':
+      await mv(path, newName);
+      break;
+    case 'rm':
+      await rm(path);
       break;
     case 'cat':
       await cat(url, path);
