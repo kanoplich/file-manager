@@ -9,6 +9,8 @@ import { mv } from "../fs/mv.js";
 import { rm } from "../fs/rm.js";
 import { systemInfo } from "../os/systemInfo.js";
 import { calculateHash } from "../hash/calculateHash.js";
+import { compress } from "../zip/compress.js";
+import { decompress } from "../zip/decompress.js";
 
 export const instructionFunc = async (line, url) => {
   const [command, path, newName] = line.split(' ');
@@ -46,6 +48,12 @@ export const instructionFunc = async (line, url) => {
       break;
     case 'hash':
       await calculateHash(path);
+      break;
+    case 'compress':
+      await compress(path, newName);
+      break;
+    case 'decompress':
+      await decompress(path, newName)
       break;
     default:
       console.log('Invalid input');
