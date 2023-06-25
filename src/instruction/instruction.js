@@ -7,6 +7,7 @@ import { rn } from "../fs/rn.js";
 import { cp } from "../fs/cp.js";
 import { mv } from "../fs/mv.js";
 import { rm } from "../fs/rm.js";
+import { systemInfo } from "../os/systemInfo.js";
 
 export const instructionFunc = async (line, url) => {
   const [command, path, newName] = line.split(' ');
@@ -20,6 +21,9 @@ export const instructionFunc = async (line, url) => {
       break;
     case 'ls':
       await ls();
+      break;
+    case 'cat':
+      await cat(url, path);
       break;
     case 'add':
       await add(url, path);
@@ -36,8 +40,8 @@ export const instructionFunc = async (line, url) => {
     case 'rm':
       await rm(path);
       break;
-    case 'cat':
-      await cat(url, path);
+    case 'os':
+      systemInfo(path);
       break;
     default:
       console.log('Invalid input');
