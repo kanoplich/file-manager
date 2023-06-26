@@ -12,6 +12,7 @@ export const cat = async (url, path) => {
     readFile.on('data', (chunk) => {
       process.stdout.write(chunk);
     });
+
     readFile.on('error', () => {
       console.log('Operation failed');
     });
